@@ -27,18 +27,29 @@ app.get("/api/hello", (req, res) => {
 
 app.get("/api/:date", (req, res) => {  
   var reqDate = req.params.date;
+  //checks given parameter; timestamp format or date format
   var timestampOrDate = Number(reqDate);
+  //not NaN means that it was a timestamp formatted as string
   if (isNaN(timestampOrDate) == false) {
+    //creates Date object
     var utc = new Date(timestampOrDate);
+    //formats output
     utc = utc.toUTCString();
+    //response
     res.json({ unix: timestampOrDate, utc: utc })
   } else {
+    //checks if date format is legit
     var timestamp = Date.parse(reqDate);
+    //not NaN = legit
     if (isNaN(timestamp) == false) {
+      //creates Date object
       var utc = new Date(timestamp);
+      //formats output
       utc = utc.toUTCString();
+      //response
       res.json({ unix: timestamp, utc: utc });
     } else {
+      //invalid request parameter
       res.json({ error: "Invalid Date" });
     };
   };
