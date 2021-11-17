@@ -64,48 +64,16 @@ module.exports = {
       return res.send("Can't find user");
     }
 
-    let queryParameters = req.query;
+    let { from = new Date(0), to = new Date(), limit = 50 } = req.query;
 
-    if (Object.keys(queryParameters).length === 0) {
-      let logResponse = {
-        username: userData.username,
-        count: userData.exercises.length,
-        _id: userData._id,
-        log: userData.exercises,
-      };
-      return res.send(logResponse);
-    }
+    let queriedLogs = userData.exercises.filter(
+      (exercise) =>
+        new Date(exercise.date).getTime() >= new Date(from).getTime() &&
+        new Date(exercise.date) <= new Date(to).getTime()
+    );
 
-    let retrievedLogs = [...userData.exercises];
-
-    for (let item in queryParameters) {
-      if (item === "from") {
-        let fromTimestamp = new Date(queryParameters.from).getTime();
-        for (let i = 0; i < retrievedLogs.length; i++) {
-          let timestampExerciseDate = new Date(retrievedLogs[i].date).getTime();
-          if (timestampExerciseDate < fromTimestamp) {
-            retrievedLogs.splice(i, 1);
-            i--;
-          }
-        }
-      }
-
-      if (item === "to") {
-        let toTimestamp = new Date(queryParameters.to).getTime();
-        for (let j = 0; j < retrievedLogs.length; j++) {
-          let timestampExerciseDate = new Date(retrievedLogs[j].date).getTime();
-          if (timestampExerciseDate > toTimestamp) {
-            retrievedLogs.splice(j, 1);
-            i--;
-          }
-        }
-      }
-
-      if (item === "limit") {
-        let limit = Number(queryParameters.limit);
-        retrievedLogs = retrievedLogs.slice(0, limit);
-      }
-    }
+    limit = Number(limit);
+    retrievedLogs = queriedLogs.slice(0, limit);
 
     for (let k = 0; k < retrievedLogs.length; k++) {
       retrievedLogs[k].date = retrievedLogs[k].date.toString();
