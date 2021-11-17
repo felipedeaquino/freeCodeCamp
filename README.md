@@ -9,6 +9,7 @@
 &#128293; [Timestamp Microservice](https://github.com/felipedeaquino/freeCodeCamp/tree/master/project-timestamp) - Replit <br>
 &#128293; [Request Header Parser Microservice](https://github.com/felipedeaquino/freeCodeCamp/tree/master/project-headerparser) - Replit <br>
 &#128293; [URL Shortener Microservice](https://github.com/felipedeaquino/freeCodeCamp/tree/master/project-urlshortener) - Replit <br>
+&#128293; [Exercise Tracker](https://github.com/felipedeaquino/freeCodeCamp/tree/master/exercise-tracker) - Replit <br>
 
 ### [JavaScript Algorithms and Data Structures](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/)
 Some of my exercises are on the (wait for it!) [exercises](https://github.com/felipedeaquino/freeCodeCamp/tree/master/exercises) folder.
